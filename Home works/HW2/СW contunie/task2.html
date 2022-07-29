@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>ITEA-JS ADVANCED - LESSON 2: CLASSWORK 2</title>
+  <link rel="stylesheet" href="css/style.min.css" />
+</head>
+<body>
+  <div class="wrap">
+    <div class="testBlock hover">
+      <button class="iButton" id="mouseHover">1. Hover!</button>
+      <ul id="hoverResult" class="resultBlock">
+        <!-- <li class="red">Hovered!</li>
+        <li class="blue">Hovered!</li>
+        <li class="orange">Hovered!</li>
+        <li class="orange">Hovered!</li>
+        <li class="purple">Hovered!</li> -->
+      </ul>
+    </div>
+
+    <div class="testBlock click">
+      <button class="iButton" id="mouseClick">2. Click for do things</button>
+      <div id="clickResult" class="resultBlock one two three four five six"></div>
+    </div>
+
+    <div class="testBlock random">
+      <button class="iButton" id="mouseLight">3. Click for turn on lights</button>
+      <div id="lightResult" class="resultBlock"></div>
+    </div>
+
+    <div class="testBlock keyboard">
+      <button class="iButton" id="keyboardButton">4. Press any key</button>
+      <div id="keyboardResult" class="resultBlock key-colors"></div>
+    </div>
+
+  </div>
+
+  <script>
+
+// <!-- 3. На кнопку кліка (Light) повісити обробник, який виводитиме в
+//       блок з результатом (lightResult) почергово один із кольорів світлофора:
+//       Цикл: Off -> Red -> Yellow -> Green -> Off
+
+//       4. На кнопку з обробником натискання (onkeydown) повісити обробник який буде:
+
+//         - Виводити в блок з результатом (keyboardResult) число натискань на будь-яку клавішу клавіатури.
+//         - Давати блоку (keyboardResult) класи, які відповідають числу кліків:
+
+//         Н-р:
+//         1 -> one
+//         3 -> three
+//         5 -> five
+//         11 -> one one
+//         115 -> one one five -->
+
+
+
+    var mouseHover = document.getElementById('mouseHover');
+    var mouseClick = document.getElementById('mouseClick');
+    var mouseLight = document.getElementById('mouseLight');
+    var keyboardButton = document.getElementById('keyboardButton');
+    let arr = ['red', 'blue', 'green', 'orange', 'purple'];
+
+    function getRandomIntInclusive(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    } 
+    
+  
+   
+    mouseHover.onmouseenter = function(){
+        let hoverResult = document.querySelector('#hoverResult');
+        let rndm =  getRandomIntInclusive(0, arr.length - 1);
+        let li = document.createElement('li');
+        li.innerText = 'this is li';
+        li.classList.add(arr[rndm]);
+        
+        hoverResult.appendChild(li);
+   
+     }
+
+    var clickIndex = 0;
+    var direction = false;
+
+    let classArr = ['six', 'two', 'three', 'four', 'one', 'five'];
+    let arrSort = ['one', 'two', 'three', 'four', 'five', 'six'];
+    let clickResult = document.querySelector('#clickResult');
+
+
+    mouseClick.onclick = function(){
+        let tmp = clickResult.classList;
+       
+        if(!direction){
+            for(let i=0; i<classArr.length;i++){
+                if(clickResult.classList.contains(classArr[i])){
+                    clickResult.classList.remove(classArr[i]);
+
+                    if(classArr[i] == classArr[classArr.length-1]){
+                        direction = true;
+                    }
+                    return;
+                }
+
+            }
+        }
+        else{
+            for(let i=0; i<arrSort.length; i++){
+                if(!clickResult.classList.contains(arrSort[i])){
+                    clickResult.classList.add(arrSort[i]);
+
+                    if(arrSort[i] == arrSort[arrSort.length-1]){
+                        direction = false;
+                    }
+                }
+            }
+        }
+    }
+
+    var arrOfLights = ['Off', 'Red', 'Yellow', 'Green', 'Off'];
+
+    mouseLight.onclick = function(e){
+        var randomLight =  arrOfLights[getRandomIntInclusive(0, arrOfLights.length - 1)];
+        e.target.nextElementSibling.innerText = randomLight;
+    }
+
+
+    var counter = 0;
+    keyboardButton.onkeydown = function(e){
+      var el =  e.target.nextElementSibling;
+      el.innerText = counter;
+      var arrOfIndexes = counter.toString().split('');
+
+      var arrOfWords = arrOfIndexes.map( x => { 
+        switch (x){
+          case '0':
+            return  x = 'zero';
+          case '1':
+            return  x = 'one';
+          case '2':
+            return  x = 'two';
+          case '3':
+            return  x = 'three';
+          case '4':
+            return  x = 'four';
+          case '5':
+            return  x = 'five';
+          case '6':
+            return  x = 'six';
+          case '7':
+            return  x = 'seven';
+          case '8':
+            return  x = 'eight';
+          case '9':
+            return  x = 'nine';
+          default:
+            return  x = 'some number';
+        }
+      });
+
+      for (var item of arrOfWords){
+        el.classList.add(item);
+      }
+      
+      counter++;
+        
+    }
+
+
+  </script>
+</body>
+</html>
+
