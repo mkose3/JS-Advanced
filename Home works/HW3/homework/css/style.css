@@ -1,0 +1,69 @@
+body {
+  box-sizing: border-box;
+  padding: 10px 20px 30px;
+  background: rgb(46, 49, 201);
+  font-family: sans-serif;
+
+}
+
+.wrap {
+  margin: 10px 20px;
+  background: #fff;
+  padding: 10px 20px 30px;
+}
+
+header , h1 {
+  text-align: center;
+}
+.buttonAnimated {
+    width: 100px;
+    height: 30px;
+    background: white;
+    transition: 1s;
+    outline: none;
+}
+.buttonAnimated.animation{
+  width: 350px;
+  height: 50px;
+  background: red;
+}
+
+.eventButton.unactive{
+  background: #eee;
+  color: #a8a8a8;
+}
+
+#error{
+  color: red;
+}
+
+#bubbleParent{
+  margin-top: 20px;
+  padding: 20px 30px;
+  border: 1px solid blue;
+}
+#bubbleParent:hover{
+  background: blue;
+}
+#bubbleChild{
+  padding: 20px 30px;
+  border: 1px solid red;
+}
+#bubbleChild:hover{
+  background: red;
+}
+
+.loadedImage {
+  transform: rotate(390deg);
+  transition: 0.5s;
+}
+
+img {
+  display: block;
+  transform: scale(0);
+  transition: 3s;
+}
+.animation {
+  transform: unset;
+  margin: 0 auto;
+}
