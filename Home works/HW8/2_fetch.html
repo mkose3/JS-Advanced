@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fetch</title>
+
+    <!-- /*
+    Завдання:
+    
+      1. За допомогою fetch отримати дані:
+         https://jsonplaceholder.typicode.com/users
+    
+      2. Отриману відповідь перетворити на json викликавши метод .json з об'єкта відповіді
+      3. Вибрати випадкову людину і передати до наступного чейну промісу
+      4. Зробити додатковий запит на отримання списку постів людини
+         https://jsonplaceholder.typicode.com/posts
+         І далі передати об'єкт:
+          {
+            name: userName,
+            ...
+            posts: postsData
+          }
+    
+         Підказка потрібно викликати додатковий fecth з поточного чейну.
+         Для того щоб передати результат виконання дод. запиту
+         у наш перший проміс використовуйте констуркцію:
+    
+          .then(
+            response1 => {
+              return fetch(...)
+                .then(
+                  response2 => {
+                    ...
+                    формуєте об'єкт у якому будуть дані людини з
+                     першого запиту, наприклад, його name response1.name
+                     та друзі які прийшли з дод. запиту
+                  }
+                )
+            }
+          )
+    
+        5. Вивести результат на сторінку
+    
+       + Бонус. Для конвертації об'єкта response в json використовувати одну
+         функцію.
+    
+    */
+    
+    
+      // fetch(url)
+      //   .then(testFunc)
+      //   .then(test2Func)
+      //   .then( res => {
+      //      return fetch()
+      //       .then( postsResponse)
+      //       .then()
+      //   })
+      //   .then( func) -->
+
+</head>
+<body>
+    <script>
+        fetch('https://jsonplaceholder.typicode.com/users')
+            .then(res1 => res1.json())    
+            .then(res1 => {
+                return res1[Math.floor(Math.random()*res1.length)];
+            })
+            .then(res1 => {
+                return fetch('https://jsonplaceholder.typicode.com/posts')
+                    .then(res2 => res2.json())
+                    .then(res2 => {
+                        let obj = {};
+                        obj.name = res1.id;
+                        obj.posts = res2[0].body.map( item => item.name);
+
+                        // console.log(obj);
+                        console.log(JSON.stringify(obj));
+                    })
+            });
+    </script>
+    
+</body>
+</html>
