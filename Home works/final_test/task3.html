@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Task3</title>
+</head>
+<body>
+    <script>
+        /*
+            Завдання 1:
+
+             Написати об'єкт Train у якого будуть властивості:
+             -ім'я,
+             -швидкість їзди
+             -кількість пасажирів
+             Методи:
+             Їхати -> Поїзд {name} везе { кількість пасажирів} зі швидкістю {speed}
+             Стояти -> Поїзд зупинився. Швидкість {Speed}
+             Підібрати пасажирів -> Збільшує кількість пасажирів на Х
+        */    
+
+    let Train = {
+        name: 'Train name',
+        speed: 200,
+        passengersCount: 150,
+        go: function(){
+            console.log(`Потяг ${this.name} везе ${this.passengersCount} зі швидкістю ${this.speed}`);
+        },
+        stop: function(){
+            console.log(`Потяг ${this.name} зупинився. Швидкість ${this.speed}`)
+        },
+        pickUp: function(){
+            this.passengersCount++;
+        }
+    }
+
+    Train.go();
+    Train.stop();
+    Train.pickUp();
+    console.log(Train.passengersCount);
+
+    </script>
+</body>
+</html>
